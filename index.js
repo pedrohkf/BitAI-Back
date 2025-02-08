@@ -38,7 +38,3 @@ mongoose.connect(process.env.MONGO_URI, {
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
-
-module.exports = (req, res) => {
-    res.status(200).json({ message: "Hello World" });
-  };

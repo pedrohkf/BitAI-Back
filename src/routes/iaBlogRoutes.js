@@ -1,11 +1,11 @@
 const express = require('express')
-const Groq = require('groq-sdk')
+const groq = require('groq-sdk')
 const dotenv = require('dotenv')
 
 dotenv.config();
 const router = express.Router();
 
-const groq = new Groq({
+const groqClient = new groq({
     apiKey: process.env.GROQ_API_KEY
 })
 
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 
     const userMessage = req.body.message;
 
-    const chatPrompt = await groq.chat.completions.create({
+    const chatPrompt = await groqClient.chat.completions.create({
         "messages": [
             {
                 "role": "user", "content":
