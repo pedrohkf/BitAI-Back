@@ -18,13 +18,6 @@ app.use(cors({
 }));
 
 
-//upodates
-// app.use(cors({
-//     origin: 'http://localhost:3000',
-//     methods: ['GET', 'POST', 'PUT'],
-//     credentials: true
-// }));
-
 app.use(express.json());
 app.use('/users', users);
 app.use('/auth', authRoutes);
