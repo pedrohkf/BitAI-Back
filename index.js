@@ -12,11 +12,13 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-    origin: '*',
+     origin: '*',
     methods: ['GET', 'POST', 'PUT'],
     credentials: true
 }));
 
+
+//upodates
 // app.use(cors({
 //     origin: 'http://localhost:3000',
 //     methods: ['GET', 'POST', 'PUT'],
@@ -31,7 +33,7 @@ app.use('/category', categorieRoutes);
 app.use('/blogs', blogsRoutes);
 app.use('/ia', iaBlogRoutes);
 
-const port = process.env.PORT || 3001;
+const port =  process.env.PORT || 3001;
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
