@@ -11,12 +11,7 @@ const iaBlogRoutes = require("./src/routes/iaBlogRoutes");
 require('dotenv').config();
 const app = express();
 
-app.use(cors({
-     origin: '*',
-    methods: ['GET', 'POST', 'PUT'],
-    credentials: true
-}));
-
+app.use(cors());
 
 app.use(express.json());
 app.use('/users', users);
@@ -26,15 +21,23 @@ app.use('/category', categorieRoutes);
 app.use('/blogs', blogsRoutes);
 app.use('/ia', iaBlogRoutes);
 
-const port =  process.env.PORT || 3001;
-mongoose.set('strictQuery', false);
+app.get("/", (req, res) => {
+    res.send("Hello, world!");
+});
+
+const port = process.env.PORT || 2700;
+
+mongoose.set('strictQuery', true);
+
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
     .then(() => console.log("Conexão com MongoDB"))
-    .catch(() => console.log("Erro na conexão"));
+    .catch((error) => console.log("Erro na conexão com MongoDB:", error.message));
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
+
+module.exports = app;
