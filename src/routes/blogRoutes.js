@@ -21,7 +21,6 @@ router.post('/add', async (req, res) => {
             catchyPhrase,
             introductoryText,
             developmentText,
-            subText,
             complementText,
             conclusion,
             img,
