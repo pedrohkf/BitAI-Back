@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
                     `${userMessage}`
             }
         ],
-        "model": "deepseek-r1-distill-llama-70b",
+        "model": "llama3-8b-8192",
         "temperature": 1,
         "max_tokens": 1024,
         "top_p": 1,
