@@ -21,11 +21,11 @@ router.post('/', async (req, res) => {
                     `${userMessage}`
             }
         ],
-        "model": "llama3-8b-8192",
-        "temperature": 1,
-        "max_tokens": 1024,
-        "top_p": 1,
-        "stream": false,
+        "model": "deepseek-r1-distill-llama-70b",
+        "temperature": 0.6,
+        "max_tokens": 4096,
+        "top_p": 0.95,
+        "stream": true,
         "stop": null
     });
 

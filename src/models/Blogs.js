@@ -25,10 +25,6 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    complementText: {
-        type: String,
-        required: true
-    },
     conclusion: {
         type: String,
         required: true
