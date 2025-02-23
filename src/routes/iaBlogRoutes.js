@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
         "temperature": 0.6,
         "max_tokens": 4096,
         "top_p": 0.95,
-        "stream": true,
+        "stream": false,
         "stop": null
     });
 
