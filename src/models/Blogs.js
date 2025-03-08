@@ -1,3 +1,4 @@
+const { type } = require('express/lib/response')
 const mongoose = require('mongoose')
 
 const blogSchema = new mongoose.Schema({
@@ -36,6 +37,10 @@ const blogSchema = new mongoose.Schema({
     writerName: {
         type: String,
         required: true
+    },
+    createadAt: {
+        type: Date,
+        default: Date.now()
     },
     user: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User',
