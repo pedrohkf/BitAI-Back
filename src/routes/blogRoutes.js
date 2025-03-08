@@ -5,7 +5,7 @@ const User = require('../models/User');
 const router = express.Router();
 
 router.post('/add', async (req, res) => {
-    const { title, subTitle, complementTitle, catchyPhrase, introductoryText, developmentText, conclusion, img, userId } = req.body;
+    const { title, subTitle, complementTitle, catchyPhrase, introductoryText, developmentText, conclusion, img, writerName, userId } = req.body;
 
     try {
         const user = await User.findById({ _id: userId });
@@ -23,6 +23,7 @@ router.post('/add', async (req, res) => {
             developmentText,
             conclusion,
             img,
+            writerName,
             user: userId
         });
 
@@ -33,19 +34,10 @@ router.post('/add', async (req, res) => {
     }
 });
 
-// router.get('/', async (req, res) => {
-//     try {
-//         const blogs = await Blog.find();
-//         res.status(200).json(blogs);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// })
-
 router.get('/:userId', async (req, res) => {
     const { userId } = req.params;
     try {
-        const blog = await Blog.find({user: userId});
+        const blog = await Blog.find({ user: userId });
 
         if (!blog) return res.status(404).send("Blog não encontrado")
 
