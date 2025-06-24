@@ -1,8 +1,9 @@
 const Ebook = require("../models/Ebook");
 
-const addEbook = async({introduction}) => {
+const addEbook = async ({ introduction, development }) => {
     const ebook = new Ebook({
-        introduction
+        introduction,
+        development
     })
 
     await ebook.save();
