@@ -1,6 +1,7 @@
 const express = require('express');
 const Ebook = require('../models/Ebook');
 const User = require('../models/User');
+const { default: mongoose, Types } = require('mongoose');
 
 const router = express.Router();
 
@@ -18,11 +19,11 @@ router.post('/add', async (req, res) => {
         links = [],
         contact,
         createadAt,
-        user: userId
+        userId
     } = req.body;
 
     try {
-        const user = await User.findById(userId);
+        const userID = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ error: 'Usuário não encontrado.' });
         }
@@ -40,7 +41,7 @@ router.post('/add', async (req, res) => {
             links,
             contact,
             createadAt: createadAt || new Date(),
-            user: userId
+            userId: userID
         });
 
         await newEbook.save();
@@ -52,14 +53,15 @@ router.post('/add', async (req, res) => {
 
 router.get('/:userId', async (req, res) => {
     const { userId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ error: 'ID inválido' });
+    }
+
     try {
-        const ebooks = await Ebook.find({ user: userId });
+        const ebooks = await Ebook.find({ userId: mongoose.Types.ObjectId(userId) });
 
-        if (!ebooks || ebooks.length === 0) {
-            return res.status(404).json({ error: 'Nenhum eBook encontrado para este usuário.' });
-        }
-
-        res.json(ebooks);
+        res.status(200).json(ebooks);
     } catch (error) {
         res.status(500).json({ error: 'Erro ao buscar eBooks', details: error.message });
     }

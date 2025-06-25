@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: false,
@@ -19,8 +19,8 @@ const userSchema = new mongoose.Schema({
         required: false,
     },
     subscription: {
-        type: String, 
-        enum: ['inicial', 'popular', 'premium'], 
+        type: String,
+        enum: ['inicial', 'popular', 'premium'],
         required: false,
     },
     accessibleIAs: [
@@ -31,13 +31,13 @@ const userSchema = new mongoose.Schema({
         default: Date.now(),
     },
 })
-userSchema.pre('save', async function (next) {
-    if(!this.isModified('password')) return next();
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next();
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
     next();
 })
-userSchema.methods.checkPassword = async function (passwordInserted) {
+UserSchema.methods.checkPassword = async function (passwordInserted) {
     return await bcrypt.compare(passwordInserted, this.password);
 }
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', UserSchema);

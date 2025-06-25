@@ -21,8 +21,8 @@ const EbookSchema = new mongoose.Schema({
     chapterCTA: { type: String, required: true },
     links: { type: [String], default: [] },
     contact: { type: String, required: false },
-    createdAt: { type: Date, default: Date.now },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false }
+    createdAt: { type: Date, default: Date.now() },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
 module.exports = mongoose.model('Ebook', EbookSchema);
