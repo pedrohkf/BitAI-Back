@@ -1,7 +1,9 @@
 const express = require('express')
 const groq = require('groq-sdk')
 const dotenv = require('dotenv')
-const ebookController = require("../controllers/ebookController")
+const ebookController = require("../controllers/ebookController");
+const blogController = require("../controllers/blogController");
+
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 dotenv.config();
@@ -42,6 +44,8 @@ router.post('/groq', async (req, res) => {
 
 
 router.post('/groq/ebook', ebookController.generateAndSaveEbook);
+router.post('/groq/blog', blogController.generateAndSaveBlog);
+
 
 
 router.post('/gemini', async (req, res) => {
