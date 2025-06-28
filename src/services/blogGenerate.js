@@ -34,7 +34,7 @@ const generateContent = async (theme, prompt) => {
     return responseContent;
 }
 
-const generateTitle = (theme) => generateContent(theme, " título");
+const generateTitle = (theme) => generateContent(theme, " título curto de no maximo 5 palavras");
 const generateSubTitle = (theme) => generateContent(theme, "subtítulo");
 const generateComplementTitle = (theme) => generateContent(theme, "título complementar ao invés do principal");
 const generateCatchyPhrase = (theme) => generateContent(theme, "uma frase de efeito com no máximo 13 palavras ");
