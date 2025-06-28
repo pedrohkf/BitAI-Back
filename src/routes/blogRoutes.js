@@ -38,7 +38,7 @@ router.post('/add', async (req, res) => {
 router.get('/:userId', async (req, res) => {
     const { userId } = req.params;
     try {
-        const blog = await Blog.find({ user: userId });
+        const blog = await Blog.find({ userId });
 
         if (!blog) return res.status(404).send("Blog não encontrado")
 
