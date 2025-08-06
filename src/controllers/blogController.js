@@ -4,7 +4,7 @@ const createBlog = require("../services/createBlog")
 const generateAndSaveBlog = async (req, res) => {
     const messageUser = req.body;
 
-    console.log(messageUser);
+    console.log("MENSAGEM USUÁRIO", messageUser);
 
     try {
         if (!messageUser) {
@@ -41,7 +41,7 @@ const generateAndSaveBlog = async (req, res) => {
             conclusion,
         });
 
-        console.log(messageUser.userId)
+        console.log("ID:", messageUser.userId)
 
         res.status(201).json({
             message: "Blog criado com sucesso!",
