@@ -18,10 +18,10 @@ const generateContent = async (theme, prompt) => {
         "messages": [
             {
                 "role": "user", "content":
-                    `Haja como um escritor de blogs e gere um ${prompt} sobre o tema ${theme}, sem caracteres especiais, como hashtags ou algo do gênero, um texto formal e limpo, no formato abnt.`
-            }
+                    `Com base no ${theme} , gere um ${prompt} com conteúdo claro, formal e objetivo, seguindo as normas da ABNT. O texto não deve conter formatação em Markdown (como #, *, listas ou negritos) e deve manter uma estrutura coesa, com parágrafos apenas onde fizer sentido.`    
+                }
         ],
-        "model": "gemma2-9b-it",
+        "model": "meta-llama/llama-4-scout-17b-16e-instruct",
         "temperature": 0.6,
         "max_tokens": 1024,
         "top_p": 0.95,
@@ -34,8 +34,12 @@ const generateContent = async (theme, prompt) => {
     return responseContent;
 }
 
-const generateTitle = (theme) => generateContent(theme, " título curto de no maximo 5 palavras");
-const generateSubTitle = (theme) => generateContent(theme, "subtítulo");
+
+const generateTitle = (theme) => generateContent(theme, "um título curto");
+const generateSubTitle = async (theme) => {
+    const title = await generateTitle(theme);
+    return generateContent(theme, `subtítulo para o título "${title}"`);
+}
 const generateComplementTitle = (theme) => generateContent(theme, "título complementar ao invés do principal");
 const generateCatchyPhrase = (theme) => generateContent(theme, "uma frase de efeito com no máximo 13 palavras ");
 const generateIntroductoryText = (theme) => generateContent(theme, "um texto introdutorio de no mínimo 500 palavras ");
